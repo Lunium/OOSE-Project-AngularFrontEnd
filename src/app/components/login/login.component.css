@@ -1,0 +1,52 @@
+mat-card {
+  overflow: hidden;
+  margin: auto;
+}
+
+form {
+  min-width: 200px;
+  margin-right: 40px;
+  width: 25%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-actions {
+  overflow: auto;
+}
+
+div.container {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  position: fixed;
+  background-color: #f6f6f6;
+  z-index: 10000;
+}
+
+body {
+  overflow: hidden;
+}
+
+div.menuContainer {
+  position: relative;
+  width: 100%;
+  min-height: 50px;
+  height: 10%;
+  max-height: 80px;
+  padding-bottom: 8px;
+  /*background-color: black;*/
+}
+
+button {
+  float: right;
+}
+
+/*@media only screen and (max-width: 600px) {*/
+  /*span.test {*/
+    /*visibility: hidden;*/
+  /*}*/
+/*}*/

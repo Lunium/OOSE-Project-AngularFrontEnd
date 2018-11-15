@@ -1,0 +1,37 @@
+<div>
+
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Datum" type="date" name="date_input" [(ngModel)]="date">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Begintijd" type="time" step="900" name="begintime_input" [(ngModel)]="beginTime">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Eindtijd" type="time" step="900" name="endtime_input" [(ngModel)]="endTime">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Capaciteit" type="number" name="capacity_input" min="0" [(ngModel)]="capacity">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Vleugel" [(ngModel)]="wingCode">
+        <mat-option>Geen voorkeur</mat-option>
+        <mat-option *ngFor="let wing of wings;" value="{{wing.wingCode}}">{{wing.wingCode}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <label>Facilities</label>
+  <div *ngFor="let facility of facilities; let i = index">
+    <mat-checkbox [(ngModel)]="checkfacilities[i]">{{facility.facilityType}}</mat-checkbox>
+  </div>
+
+  <div>
+    <button mat-button (click)="onOk()">Filter toepassen</button>
+    <button mat-button (click)="onReset()">Reset filter</button>
+  </div>
+
+</div>

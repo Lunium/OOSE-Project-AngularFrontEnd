@@ -1,0 +1,45 @@
+div.container {
+  flex: auto;
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 426px;
+  overflow: hidden;
+  background-color: #f6f6f6;
+}
+
+div.noDataContainer {
+  flex: auto;
+  width: auto;
+  max-width: 1100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 5%;
+  padding-right: 5%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-column-PinCode {
+  flex: 0.5;
+}
+
+@media only screen and (max-width: 1100px) {
+  span {
+    visibility: hidden;
+    width: 0px;
+  }
+
+  .mat-column-Cancel {
+    flex: 0.5;
+  }
+}
+
+div.cdk-visually-hidden {
+  width: 100%;
+}

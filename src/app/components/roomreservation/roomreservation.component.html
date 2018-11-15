@@ -1,0 +1,68 @@
+<router-outlet></router-outlet>
+<div class="roomReservationContainer">
+<div class="example-container mat-elevation-z8">
+  <div class="container">
+    <h1>Lokaal informatie</h1>
+    <div>Vleugel: {{wingCode}}</div>
+    <div>Lokaal: {{roomCode}}</div>
+    <div *ngIf="roomInfo">
+      <div>Capaciteit: {{roomInfo.capacity}}</div>
+      <div>Faciliteiten: <div *ngFor="let facility of roomInfo.facilities;">{{facility.facilityType}}</div></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Studenten toevoegen</h1>
+    <mat-form-field>
+      <input matInput placeholder="E-mail" type="text">
+    </mat-form-field>
+    <button mat-button>Voeg student toe</button>
+    <!--Lijst van studenten-->
+  </div>
+
+  <mat-grid-list class="test-grid-list" gutterSize="1" *ngIf="days[0]" cols="{{days[0].roomTimeSlots.length + 6}}"
+                 rowHeight="1:2">
+    <mat-grid-tile [colspan]="6">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="4" *ngFor="let number of timeSlots">
+      {{number}}
+    </mat-grid-tile>
+    <div *ngFor="let day of days;">
+      <div *ngIf="(filterStatus && day.date == date) || (!filterStatus)">
+        <mat-grid-tile [colspan]="6" rowHeight="1:2">
+          <mat-grid-tile-header>{{day.date}}</mat-grid-tile-header>
+          <mat-grid-tile-footer>{{day.dateName}}</mat-grid-tile-footer>
+        </mat-grid-tile>
+        <mat-grid-tile *ngFor="let reservation of day.roomTimeSlots;" [style.background]="reservation.color">
+          <span *ngIf="!checkBoxBool && (day.dateName === chosenDateName || chosenDateName === null) && reservation.shouldDraw">
+            <input type="checkbox" *ngIf="!reservation.reserved" [(ngModel)]="reservation.checkBoxValue" (ngModelChange)="onCheckboxClicked(reservation.checkBoxValue, day.dateName, day.date, reservation, day)">
+            <input type="checkbox" *ngIf="reservation.reserved" [(ngModel)]="reservation.checkBoxValue" disabled>
+          </span>
+          <span *ngIf="checkBoxBool && reservation.checkBoxValue || !reservation.shouldDraw">
+            <input type="checkbox" [disabled]="!reservation.checkBoxValue" *ngIf="!reservation.reserved" [(ngModel)]="reservation.checkBoxValue" (ngModelChange)="onCheckboxClicked(reservation.checkBoxValue, day.dateName, day.date, reservation, day)">
+          </span>
+        </mat-grid-tile>
+      </div>
+    </div>
+  </mat-grid-list>
+
+  <div class="input">
+    <mat-form-field>
+      <input matInput placeholder="Datum" type="date" name="date_input" [(ngModel)]="date" disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Begintijd" type="time" step="900" name="begintime_input" [(ngModel)]="beginTime" disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Eindtijd" type="time" step="900" name="endtime_input" [(ngModel)]="endTime" disabled>
+    </mat-form-field>
+  </div>
+
+  <div class="button">
+    <button mat-button (click)="onPlaceReservation()">Plaats reservering</button>
+  </div>
+</div>
+
+<div *ngIf="filterStatus" class="example-container mat-elevation-z8">
+  TRUE
+</div>

@@ -1,0 +1,21 @@
+.example-container {
+  font-family: 'Roboto';
+  display: flex;
+  flex-direction: column;
+  //max-height: 800px;
+  min-width: 500px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+  //max-width: 1000px;
+}
+
+.customWidthClass{
+  flex: 0 0 150px;
+}
+
+mat-grid-tile {
+  background: #d9d9d9;
+}

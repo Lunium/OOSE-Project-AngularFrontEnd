@@ -1,0 +1,72 @@
+<router-outlet></router-outlet>
+
+<div class="noDataContainer" *ngIf="dataSource === null" style="margin-top: 40%; margin-left: 15%; margin-right: 15%;">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<div class="noDataContainer" *ngIf="dataSource !== null && !hasData">
+  <p>Hallo <b>{{user}}</b>, het lijkt er op dat u nog geen reservering heeft geplaatst.
+    <br />
+    <br />
+    Gebruik het menu om terug naar het overzichtspagina te gaan om een reservering te plaatsen.</p>
+</div>
+
+<div *ngIf="dataSource !== null && hasData">
+  <div class="noDataContainer">
+    <p>Hallo <b>{{user}}</b>, op deze pagina ziet u een overzicht van alle door u geplaatste reserveringen.</p>
+  </div>
+
+  <div class="container mat-elevation-z8">
+
+    <!--<mat-card *ngIf="dataSource === null" >Spinner test</mat-card>-->
+
+
+
+    <mat-table #table [dataSource]="dataSource">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="Date">
+        <mat-header-cell *matHeaderCellDef> Datum </mat-header-cell>
+        <mat-cell *matCellDef="let UserReservation">{{UserReservation.date}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="RoomWingCode">
+        <mat-header-cell *matHeaderCellDef> Locatie </mat-header-cell>
+        <mat-cell *matCellDef="let UserReservation"> {{UserReservation.wingCode}} - {{UserReservation.roomCode}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="BeginTime">
+        <mat-header-cell *matHeaderCellDef> Begintijd </mat-header-cell>
+        <mat-cell *matCellDef="let UserReservation"> {{UserReservation.beginTime}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="EndTime">
+        <mat-header-cell *matHeaderCellDef> Eindtijd </mat-header-cell>
+        <mat-cell *matCellDef="let UserReservation"> {{UserReservation.endTime}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="PinCode">
+        <mat-header-cell *matHeaderCellDef> Pincode </mat-header-cell>
+        <mat-cell *matCellDef="let UserReservation"> {{UserReservation.pinCode}} </mat-cell>
+      </ng-container>
+
+      <!--cancelReservation(UserReservation)-->
+
+      <ng-container matColumnDef="Cancel">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let UserReservation">
+          <button (click)="openDialog(UserReservation)" *ngIf="UserReservation.status === 'Gereserveerd'" mat-button="test">
+            <mat-icon>cancel</mat-icon>
+            <span>Reservering annuleren</span>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['Date', 'RoomWingCode', 'BeginTime', 'EndTime', 'PinCode', 'Cancel']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['Date', 'RoomWingCode', 'BeginTime', 'EndTime', 'PinCode', 'Cancel'];"></mat-row>
+    </mat-table>
+  </div>
+</div>

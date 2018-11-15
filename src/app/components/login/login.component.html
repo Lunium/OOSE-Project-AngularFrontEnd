@@ -1,0 +1,41 @@
+<div class="container" *ngIf="!loggedIn">
+  <mat-card>
+    <form #myForm="ngForm" (ngSubmit)="onSubmit(ngForm)" method="post">
+      <mat-form-field>
+        <input matInput [(ngModel)]="login.email" name="email" placeholder="E-mail adres" type="email">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [(ngModel)]="login.password" name="password" placeholder="Wachtwoord" [type]="hide ? 'text' : 'password'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      </mat-form-field>
+      <button type="submit" mat-button routerLink="/reservations">Login</button>
+    </form>
+  </mat-card>
+</div>
+
+<div class="menuContainer" *ngIf="loggedIn">
+  <mat-card>
+
+    <button mat-button [matMenuTriggerFor]="menu">
+      <span class="test">Menu</span>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" >
+      <button mat-menu-item routerLink="/reservations">
+        <mat-icon>view_list</mat-icon>
+        <span>Overzicht</span>
+      </button>
+      <button mat-menu-item routerLink="/myreservations">
+        <mat-icon>perm_contact_calendar</mat-icon>
+        <span>Mijn reserveringen</span>
+      </button>
+      <button (click)="logout()" mat-menu-item>
+        <mat-icon>subdirectory_arrow_right</mat-icon>
+        <span>Uitloggen</span>
+      </button>
+    </mat-menu>
+
+  </mat-card>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,19 @@
+<app-filter (onFilterChanged)="onFilterChanged($event)" (setFilterStatus)="setFilterStatus($event)"></app-filter>
+<router-outlet></router-outlet>
+<div class="example-container mat-elevation-z8">
+  <mat-grid-list class="test-grid-list" gutterSize="1" *ngIf="rooms[0]" gutterSize="1" cols="{{rooms[0].roomTimeSlots.length + 6}}">
+    <mat-grid-tile [colspan]="6">
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="4" *ngFor="let number of timeSlots">
+      {{number}}
+    </mat-grid-tile>
+
+    <div *ngFor="let room of rooms">
+      <mat-grid-tile [colspan]="6">
+        <a routerLink="room/{{room.routerPath}}">{{room.room}}</a>
+      </mat-grid-tile>
+      <mat-grid-tile *ngFor="let reservation of room.roomTimeSlots" [style.background]="reservation.color">
+      </mat-grid-tile>
+    </div>
+  </mat-grid-list>
+</div>
